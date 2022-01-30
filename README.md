@@ -1,5 +1,5 @@
 # Maidenhead Locator for golang
-[![Build Status](https://app.travis-ci.com/logocomune/maidenhead.svg?branch=master)](https://app.travis-ci.com/logocomune/maidenhead)
+[![CircleCI](https://circleci.com/gh/logocomune/maidenhead/tree/main.svg?style=svg)](https://circleci.com/gh/logocomune/maidenhead/tree/main)
 [![Go Report Card](https://goreportcard.com/badge/github.com/logocomune/maidenhead)](https://goreportcard.com/report/github.com/logocomune/maidenhead)
 [![codecov](https://codecov.io/gh/logocomune/maidenhead/branch/master/graph/badge.svg)](https://codecov.io/gh/logocomune/maidenhead)
 
