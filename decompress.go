@@ -18,7 +18,7 @@ type SquareCoordinate struct {
 	BottomRight Coordinate
 }
 
-//GridCenter returns the center of the square grid
+// GridCenter returns the center of the square grid
 func GridCenter(locator string) (float64, float64, error) {
 	locatorLength := len(locator)
 	if locatorLength%2 != 0 {
@@ -91,7 +91,7 @@ func subLocatorDecode(subLocatorLng, subLocatorLat string, step int) (float64, f
 	return lat, lng, nil
 }
 
-//Square returns the coordinates of the vertices of the square grid
+// Square returns the coordinates of the vertices of the square grid
 func Square(locator string) (SquareCoordinate, error) {
 	centerLat, centerLng, err := GridCenter(locator)
 	if err != nil {

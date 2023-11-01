@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-//Locator returns the Maidenhead locator for the given latitude and longitude and requested precision.
+// Locator returns the Maidenhead locator for the given latitude and longitude and requested precision.
 func Locator(lat, lng float64, precision int) (string, error) {
 	if math.Abs(lat) >= 90 {
 		return "", errors.New("invalid latitude allowed values are between -90 and 90")
