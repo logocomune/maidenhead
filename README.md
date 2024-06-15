@@ -1,8 +1,11 @@
 # Maidenhead Locator for golang
 
-[![CircleCI](https://circleci.com/gh/logocomune/maidenhead/tree/main.svg?style=svg)](https://circleci.com/gh/logocomune/maidenhead/tree/main)
-[![Go Report Card](https://goreportcard.com/badge/github.com/logocomune/maidenhead)](https://goreportcard.com/report/github.com/logocomune/maidenhead)
-[![codecov](https://codecov.io/gh/logocomune/maidenhead/branch/master/graph/badge.svg)](https://codecov.io/gh/logocomune/maidenhead)
+
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/logocomune/maidenhead)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/logocomune/maidenhead/go.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/logocomune/maidenhead)](https://pkg.go.dev/github.com/logocomune/maidenhead)
+[![codecov](https://codecov.io/gh/logocomune/maidenhead/graph/badge.svg?token=GGN3PHjyZV)](https://codecov.io/gh/logocomune/maidenhead)
+[![Go Report Card](https://goreportcard.com/badge/github.com/logocomune/maidenhead)](https://goreportcard.com/report/github.com/maidenhead/maidenhead)
 
 The [Maidenhead Locator System](https://en.wikipedia.org/wiki/Maidenhead_Locator_System)
 (a.k.a. QTH Locator and IARU Locator) is a geocode system used by amateur radio operators
