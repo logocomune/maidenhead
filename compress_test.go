@@ -1,6 +1,9 @@
 package maidenhead
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestLocator(t *testing.T) {
 
@@ -90,6 +93,26 @@ func TestLocator(t *testing.T) {
 			wantErr: true,
 		},
 		{
+			name: "Grid size zero",
+			args: args{
+				lat:      0,
+				lng:      0,
+				gridSize: 0,
+			},
+			want:    "",
+			wantErr: true,
+		},
+		{
+			name: "Grid size negative",
+			args: args{
+				lat:      0,
+				lng:      0,
+				gridSize: -2,
+			},
+			want:    "",
+			wantErr: true,
+		},
+		{
 			name: "Grid size 2",
 			args: args{
 				lat:      testLat,
@@ -150,6 +173,30 @@ func TestLocator(t *testing.T) {
 			}
 			if got != tt.want {
 				t.Errorf("Locator() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkLocator(b *testing.B) {
+	precisions := []struct {
+		name      string
+		precision int
+	}{
+		{"Field", FieldPrecision},
+		{"Square", SquarePrecision},
+		{"SubSquare", SubSquarePrecision},
+		{"ExtendedSquare", ExtendedSquarePrecision},
+		{"SubExtendedSquare", SubExtendedSquarePrecision},
+	}
+
+	lat := 43.443534
+	lng := 10.254315
+
+	for _, p := range precisions {
+		b.Run(fmt.Sprintf("precision_%s_%d", p.name, p.precision), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				_, _ = Locator(lat, lng, p.precision)
 			}
 		})
 	}

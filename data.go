@@ -23,20 +23,17 @@ const (
 	SubSquarePrecision         = 6
 	ExtendedSquarePrecision    = 8
 	SubExtendedSquarePrecision = 10
+
+	alphabetSize = 24
 )
 
 var latDivider = [5]float64{latFieldWidth, latSquareWidth, latSubSquareWidth, latExtendedSquareWidth, latSubExtendedSquareWidth}
 
 var lngDivider = [5]float64{lngFieldWidth, lngSquareWidth, lngSubSquareWidth, lngExtendedSquareWidth, lngSubExtendedSquareWidth}
 
-var alphabet = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-	"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X"}
-
-var alphaMap map[string]int
-
-func init() {
-	alphaMap = make(map[string]int, len(alphaMap))
-	for i, v := range alphabet {
-		alphaMap[v] = i
-	}
+var alphabet = [alphabetSize]byte{
+	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+	'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
 }
+
+var digits = [10]byte{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}

@@ -6,13 +6,13 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/logocomune/maidenhead)](https://pkg.go.dev/github.com/logocomune/maidenhead)
 [![codecov](https://codecov.io/gh/logocomune/maidenhead/graph/badge.svg?token=GGN3PHjyZV)](https://codecov.io/gh/logocomune/maidenhead)
 [![Go Report Card](https://goreportcard.com/badge/github.com/logocomune/maidenhead)](https://goreportcard.com/report/github.com/logocomune/maidenhead)
+[![CodeFactor](https://www.codefactor.io/repository/github/logocomune/maidenhead/badge)](https://www.codefactor.io/repository/github/logocomune/maidenhead)
 
 The [Maidenhead Locator System](https://en.wikipedia.org/wiki/Maidenhead_Locator_System)
 (a.k.a. QTH Locator and IARU Locator) is a geocode system used by amateur radio operators
 to succinctly describe their geographic coordinates.
 
-This Golang library compresses and decompresses (latitude, longitude) coordinates to and
-from a Maidenhead locator.
+This Golang library converts latitude and longitude coordinates to and from Maidenhead locator strings.
 
 ## Installation
 
@@ -20,9 +20,50 @@ from a Maidenhead locator.
 go get -u github.com/logocomune/maidenhead
 ```
 
+## API
+
+### Locator
+
+`Locator(lat, lng float64, precision int) (string, error)` converts latitude and longitude into a Maidenhead locator string with the given precision.
+
+### GridCenter
+
+`GridCenter(locator string) (lat, lng float64, err error)` returns the center coordinates of the given Maidenhead locator.
+
+### Square
+
+`Square(locator string) (SquareCoordinate, error)` returns the center and the four corner coordinates of the grid square.
+
+### Types
+
+```go
+type Coordinate struct {
+    Lat float64
+    Lng float64
+}
+
+type SquareCoordinate struct {
+    Center      Coordinate
+    TopLeft     Coordinate
+    TopRight    Coordinate
+    BottomLeft  Coordinate
+    BottomRight Coordinate
+}
+```
+
+### Precision constants
+
+| Constant | Value | Example |
+|---|---|---|
+| `FieldPrecision` | 2 | `JN` |
+| `SquarePrecision` | 4 | `JN53` |
+| `SubSquarePrecision` | 6 | `JN53dk` |
+| `ExtendedSquarePrecision` | 8 | `JN53dk06` |
+| `SubExtendedSquarePrecision` | 10 | `JN53dk06MK` |
+
 ## Usage
 
-```golang
+```go
 package main
 
 import (

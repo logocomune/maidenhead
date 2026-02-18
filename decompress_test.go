@@ -1,6 +1,7 @@
 package maidenhead
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -57,6 +58,42 @@ func TestGridCenter(t *testing.T) {
 			name: "Locator bad format #2",
 			args: args{
 				locator: "JN0Adk06MK",
+			},
+			want:    0,
+			want1:   0,
+			wantErr: true,
+		},
+		{
+			name: "Locator with digits instead of letters in field",
+			args: args{
+				locator: "12",
+			},
+			want:    0,
+			want1:   0,
+			wantErr: true,
+		},
+		{
+			name: "Locator with invalid letter Y in field",
+			args: args{
+				locator: "YA",
+			},
+			want:    0,
+			want1:   0,
+			wantErr: true,
+		},
+		{
+			name: "Locator with invalid letter Z in field",
+			args: args{
+				locator: "AZ",
+			},
+			want:    0,
+			want1:   0,
+			wantErr: true,
+		},
+		{
+			name: "Locator with special characters",
+			args: args{
+				locator: "@!",
 			},
 			want:    0,
 			want1:   0,
@@ -262,6 +299,48 @@ func TestSquare(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Square() got = %+v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkGridCenter(b *testing.B) {
+	locators := []struct {
+		name    string
+		locator string
+	}{
+		{"Field", "JN"},
+		{"Square", "JN53"},
+		{"SubSquare", "JN53dk"},
+		{"ExtendedSquare", "JN53dk06"},
+		{"SubExtendedSquare", "JN53dk06MK"},
+	}
+
+	for _, l := range locators {
+		b.Run(fmt.Sprintf("len_%s_%d", l.name, len(l.locator)), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				_, _, _ = GridCenter(l.locator)
+			}
+		})
+	}
+}
+
+func BenchmarkSquare(b *testing.B) {
+	locators := []struct {
+		name    string
+		locator string
+	}{
+		{"Field", "JN"},
+		{"Square", "JN53"},
+		{"SubSquare", "JN53dk"},
+		{"ExtendedSquare", "JN53dk06"},
+		{"SubExtendedSquare", "JN53dk06MK"},
+	}
+
+	for _, l := range locators {
+		b.Run(fmt.Sprintf("len_%s_%d", l.name, len(l.locator)), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				_, _ = Square(l.locator)
 			}
 		})
 	}
