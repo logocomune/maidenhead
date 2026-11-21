@@ -63,6 +63,26 @@ func TestLocator(t *testing.T) {
 			wantErr: true,
 		},
 		{
+			name: "Longitude 180",
+			args: args{
+				lat:      0,
+				lng:      180,
+				gridSize: SubSquarePrecision,
+			},
+			want:    "AJ00aa",
+			wantErr: false,
+		},
+		{
+			name: "Longitude 180 extended",
+			args: args{
+				lat:      45.5,
+				lng:      180,
+				gridSize: ExtendedSquarePrecision,
+			},
+			want:    "AN05am00",
+			wantErr: false,
+		},
+		{
 			name: "Bad longitude 02",
 			args: args{
 				lat:      0,

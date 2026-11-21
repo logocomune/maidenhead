@@ -31,6 +31,11 @@ func Locator(lat, lng float64, precision int) (string, error) {
 
 	lat += latSouthPole
 	lng += lngEastwardGreenwich
+	// Longitude 180 is the same meridian as -180: wrap it into the first field
+	// instead of writing an invalid 19th field letter ("S")
+	if lng >= 360 {
+		lng -= 360
+	}
 
 	var buf strings.Builder
 	buf.Grow(precision)
